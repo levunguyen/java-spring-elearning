@@ -14,7 +14,7 @@
     </properties>
 
     <modules>
-        <module>admin-api</module>
+        <module>admin</module>
         <module>api</module>
         <module>service</module>
         <module>dao</module>
