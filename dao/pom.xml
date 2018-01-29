@@ -15,6 +15,8 @@
     <packaging>jar</packaging>
 
     <properties>
+        <!-- data-jpa has spring framework 5.0.3-->
+        <spring-data-jpa.version>2.0.3.RELEASE</spring-data-jpa.version>
         <hibernate.version>5.0.12.Final</hibernate.version>
         <hibernate-validator.version>5.3.5.Final</hibernate-validator.version>
     </properties>
@@ -25,7 +27,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>2.0.3.RELEASE</version>
+            <version>${spring-data-jpa.version}</version>
         </dependency>
 
         <!-- ORM Dependencies -->
