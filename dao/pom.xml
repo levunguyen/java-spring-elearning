@@ -52,5 +52,11 @@
             <version>${hibernate.version}</version>
         </dependency>
 
+        <!-- MySql connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
     </dependencies>
 </project>
