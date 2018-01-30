@@ -94,5 +94,4 @@ class Course implements Serializable {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
->>>>>>> 9b3f7d1e0b28f78e7f8f4ce1ce87bde0c9014ce4
 }
