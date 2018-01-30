@@ -15,11 +15,11 @@ public class Feedback implements Serializable {
 
     @ManyToOne(targetEntity = Course.class,fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
-    private Course courseId;
+    private Course course;
 
     @ManyToOne(targetEntity = User.class,fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 
     private String feedbackContent;
 
@@ -31,10 +31,10 @@ public class Feedback implements Serializable {
     public Feedback() {
     }
 
-    public Feedback(String id, Course courseId, User userId, String feedbackContent, Date createdAt, Date updatedAt) {
+    public Feedback(String id, Course course, User user, String feedbackContent, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.courseId = courseId;
-        this.userId = userId;
+        this.course = course;
+        this.user = user;
         this.feedbackContent = feedbackContent;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -48,20 +48,20 @@ public class Feedback implements Serializable {
         this.id = id;
     }
 
-    public Course getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseId(Course courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getFeedbackContent() {

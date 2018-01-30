@@ -23,7 +23,7 @@ class Course implements Serializable {
     private double price;
 
     @OneToMany(mappedBy = "course")
-    List<UserCourse> userCourses;
+    private List<UserCourse> userCourses;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

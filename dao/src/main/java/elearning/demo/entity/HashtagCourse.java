@@ -15,11 +15,11 @@ public class HashtagCourse implements Serializable{
 
     @ManyToOne(targetEntity=Course.class,fetch=FetchType.LAZY,cascade=CascadeType.ALL)
     @JoinColumn(name = "course_id")
-    private Course courseId;
+    private Course course;
 
     @ManyToOne(targetEntity=Hashtag.class,fetch=FetchType.LAZY,cascade=CascadeType.ALL)
     @JoinColumn(name = "hashtag_id")
-    private Hashtag hashtagId;
+    private Hashtag hashtag;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -29,10 +29,10 @@ public class HashtagCourse implements Serializable{
     public HashtagCourse() {
     }
 
-    public HashtagCourse(String id, Course courseId, Hashtag hashtagId, Date createdAt, Date updatedAt) {
+    public HashtagCourse(String id, Course course, Hashtag hashtag, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.courseId = courseId;
-        this.hashtagId = hashtagId;
+        this.course = course;
+        this.hashtag = hashtag;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -45,20 +45,20 @@ public class HashtagCourse implements Serializable{
         this.id = id;
     }
 
-    public Course getCourseId() {
-        return courseId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseId(Course courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
-    public Hashtag getHashtagId() {
-        return hashtagId;
+    public Hashtag getHashtag() {
+        return hashtag;
     }
 
-    public void setHashtagId(Hashtag hashtagId) {
-        this.hashtagId = hashtagId;
+    public void setHashtag(Hashtag hashtag) {
+        this.hashtag = hashtag;
     }
 
     public Date getCreatedAt() {
