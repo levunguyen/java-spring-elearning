@@ -14,12 +14,12 @@ public class HashtagCourse implements Serializable{
     private String id= UUID.randomUUID().toString();
 
     @ManyToOne(targetEntity=Course.class,fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-    @MapsId("courseId")
-    private String courseId;
+    @JoinColumn(name = "course_id")
+    private Course courseId;
 
     @ManyToOne(targetEntity=Hashtag.class,fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-    @MapsId("hashtagId")
-    private String hashtagId;
+    @JoinColumn(name = "hashtag_id")
+    private Hashtag hashtagId;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -29,7 +29,7 @@ public class HashtagCourse implements Serializable{
     public HashtagCourse() {
     }
 
-    public HashtagCourse(String id, String courseId, String hashtagId, Date createdAt, Date updatedAt) {
+    public HashtagCourse(String id, Course courseId, Hashtag hashtagId, Date createdAt, Date updatedAt) {
         this.id = id;
         this.courseId = courseId;
         this.hashtagId = hashtagId;
@@ -41,19 +41,23 @@ public class HashtagCourse implements Serializable{
         return id;
     }
 
-    public String getCourseId() {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Course getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(Course courseId) {
         this.courseId = courseId;
     }
 
-    public String getHashtagId() {
+    public Hashtag getHashtagId() {
         return hashtagId;
     }
 
-    public void setHashtagId(String hashtagId) {
+    public void setHashtagId(Hashtag hashtagId) {
         this.hashtagId = hashtagId;
     }
 

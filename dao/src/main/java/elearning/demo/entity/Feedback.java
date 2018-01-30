@@ -15,17 +15,13 @@ public class Feedback implements Serializable {
 
     @ManyToOne(targetEntity = Course.class,fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
-    private String courseId;
+    private Course courseId;
 
     @ManyToOne(targetEntity = User.class,fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private String userId;
+    private User userId;
 
     private String feedbackContent;
-
-    private float price;
-
-    private String hashtagId;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -35,14 +31,11 @@ public class Feedback implements Serializable {
     public Feedback() {
     }
 
-    public Feedback(String id, String courseId, String userId, String feedbackContent,
-                    float price, String hashtagId, Date createdAt, Date updatedAt) {
+    public Feedback(String id, Course courseId, User userId, String feedbackContent, Date createdAt, Date updatedAt) {
         this.id = id;
         this.courseId = courseId;
         this.userId = userId;
         this.feedbackContent = feedbackContent;
-        this.price = price;
-        this.hashtagId = hashtagId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -51,11 +44,23 @@ public class Feedback implements Serializable {
         return id;
     }
 
-    public String getUserId() {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Course getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Course courseId) {
+        this.courseId = courseId;
+    }
+
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 
@@ -65,30 +70,6 @@ public class Feedback implements Serializable {
 
     public void setFeedbackContent(String feedbackContent) {
         this.feedbackContent = feedbackContent;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public String getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
-    }
-
-    public String getHashtagId() {
-        return hashtagId;
-    }
-
-    public void setHashtagId(String hashtagId) {
-        this.hashtagId = hashtagId;
     }
 
     public Date getCreatedAt() {
