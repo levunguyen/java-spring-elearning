@@ -3,6 +3,7 @@ package elearning.demo.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -12,7 +13,10 @@ public class Video implements Serializable {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    private String sectionId;
+//    private String sectionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "section_id")
+    private Section section;
 
     private String videoName;
 
@@ -26,101 +30,96 @@ public class Video implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("sectionId")
-    private Section section;
+    // Sai như bên Comment entity
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @MapsId("sectionId")
+//    private Section section;
 
-    @OneToMany(
-            mappedBy = "video",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private Comment comment;
+    // One to many phải map tới 1 list
+//    @OneToMany(
+//            mappedBy = "video",
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true
+//    )
+//    private Comment comment;
+
+    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
 
     public Video() {}
 
-    public Video(String id, String sectionId, String videoName, String description, String videoUrl, Date createdAt,
-                 Date updatedAt, Section section, Comment comment) {
+    public Video(String id, Section section, String videoName, String description, String videoUrl, Date createdAt, Date updatedAt, List<Comment> comments) {
         this.id = id;
-        this.sectionId = sectionId;
+        this.section = section;
         this.videoName = videoName;
         this.description = description;
         this.videoUrl = videoUrl;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.section = section;
-        this.comment = comment;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+        this.comments = comments;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getSectionId() {
-        return sectionId;
-    }
-
-    public String getVideoName() {
-        return videoName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Section getSection() {
         return section;
     }
 
-    public Comment getComment() {
-        return comment;
+    public void setSection(Section section) {
+        this.section = section;
     }
 
-    public void setSectionId(String sectionId) {
-        this.sectionId = sectionId;
+    public String getVideoName() {
+        return videoName;
     }
 
     public void setVideoName(String videoName) {
         this.videoName = videoName;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public void setSection(Section section) {
-        this.section = section;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setComment(Comment comment) {
-        this.comment = comment;
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

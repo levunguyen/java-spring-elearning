@@ -14,7 +14,11 @@ public class Section implements Serializable{
     @Id
     private String id = UUID.randomUUID().toString();
 
-    private String courseId;
+//    private String courseId;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     private String sectionName;
 
@@ -24,9 +28,10 @@ public class Section implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("courseId")
-    private Course course;
+    // Lỗi
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @MapsId("courseId")
+//    private Course course;
 
     @OneToMany(
             mappedBy = "section",
@@ -37,67 +42,60 @@ public class Section implements Serializable{
 
     public Section() {}
 
-    public Section(String sectionId, String courseId, String sectionName, Date createdAt, Date updatedAt,
-                   Course course, List<Video> listVideo) {
-        this.id = sectionId;
-        this.courseId = courseId;
+    public Section(String id, Course course, String sectionName, Date createdAt, Date updatedAt, List<Video> listVideo) {
+        this.id = id;
+        this.course = course;
         this.sectionName = sectionName;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.course = course;
         this.listVideo = listVideo;
     }
 
-    public String getSectionId() {
+    public String getId() {
         return id;
     }
 
-    public String getCourseId() {
-        return courseId;
-    }
-
-    public String getSectionName() {
-        return sectionName;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Course getCourse() {
         return course;
     }
 
-    public List<Video> getListVideo() {
-        return listVideo;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public String getSectionName() {
+        return sectionName;
     }
 
     public void setSectionName(String sectionName) {
         this.sectionName = sectionName;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public List<Video> getListVideo() {
+        return listVideo;
     }
 
     public void setListVideo(List<Video> listVideo) {
         this.listVideo = listVideo;
     }
-
 }
