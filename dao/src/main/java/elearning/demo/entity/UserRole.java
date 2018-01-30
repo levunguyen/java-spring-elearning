@@ -2,49 +2,57 @@ package elearning.demo.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
-@Entity(name = "Role")
+@Entity(name = "UserRole")
 @Table
-public class Role implements Serializable {
+public class UserRole implements Serializable {
     private static final long serialVersionUID = 1L;
+    /*@EmbeddedId
+    private UserRoleId id;*/
     @Id
     private String id = UUID.randomUUID().toString();
-    private String roleName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("roleId")
+    private Role role;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("userId")
+    private User user;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
-    @OneToMany(
-            mappedBy = "role",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<UserRole> userRoles = new ArrayList<>();
-    public Role() {
+
+    public UserRole() {
     }
 
-    public Role(String id, String roleName, Date createdAt, Date updateAt, List<UserRole> userRoles) {
+    public UserRole(String id, Role role, User user, Date createdAt, Date updateAt) {
         this.id = id;
-        this.roleName = roleName;
+        this.role = role;
+        this.user = user;
         this.createdAt = createdAt;
         this.updateAt = updateAt;
-        this.userRoles = userRoles;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getCreatedAt() {
@@ -61,14 +69,5 @@ public class Role implements Serializable {
 
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
-    }
-
-
-    public List<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(List<UserRole> userRoles) {
-        this.userRoles = userRoles;
     }
 }
