@@ -7,23 +7,24 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Entity(name = "Role")
-@Table
+@Entity
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
     private String id = UUID.randomUUID().toString();
+
     private String roleName;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
-    @OneToMany(
-            mappedBy = "role",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserRole> userRoles = new ArrayList<>();
+
     public Role() {
     }
 

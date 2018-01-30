@@ -5,22 +5,30 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-@Entity(name = "UserRole")
-@Table
+@Entity
 public class UserRole implements Serializable {
     private static final long serialVersionUID = 1L;
-    /*@EmbeddedId
-    private UserRoleId id;*/
+
     @Id
     private String id = UUID.randomUUID().toString();
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @MapsId("roleId")
+//    private Role role;
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("roleId")
+    @JoinColumn(name = "role_id")
     private Role role;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @MapsId("userId")
+//    private User user;
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("userId")
+    @JoinColumn(name = "user_id")
     private User user;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
 

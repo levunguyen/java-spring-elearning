@@ -5,22 +5,26 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-@Entity(name = "Profile")
-@Table
+@Entity
 public class Profile implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
     private String id = UUID.randomUUID().toString();
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     private String firstName;
+
     private String lastName;
+
     private String biography;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
 
