@@ -11,15 +11,15 @@ import java.util.List;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class CourseDetailModel {
+public class CourseDetail {
 
     private Course course;
 
     private List<Section> sectionList;
 
-    public CourseDetailModel() {}
+    public CourseDetail() {}
 
-    public CourseDetailModel(Course course, List<Section> sectionList) {
+    public CourseDetail(Course course, List<Section> sectionList) {
         this.course = course;
         this.sectionList = sectionList;
     }

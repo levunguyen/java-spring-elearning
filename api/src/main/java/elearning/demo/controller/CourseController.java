@@ -1,7 +1,7 @@
 package elearning.demo.controller;
 
 import elearning.demo.entity.Course;
-import elearning.demo.model.CourseDetailModel;
+import elearning.demo.model.CourseDetail;
 import elearning.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class CourseController {
 
     @GetMapping(value = "course/{courseId}")
     public ResponseEntity<Object> showDetailCourse(@PathVariable String courseId){
-        Optional<CourseDetailModel> courseOptional = Optional.ofNullable(courseService.getDetailCourse(courseId));
+        Optional<CourseDetail> courseOptional = Optional.ofNullable(courseService.getDetailCourse(courseId));
         if(courseOptional.isPresent()){
             return new ResponseEntity<>(courseOptional.get(), HttpStatus.OK);
         }
