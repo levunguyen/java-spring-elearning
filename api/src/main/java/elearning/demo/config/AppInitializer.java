@@ -12,7 +12,9 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Nullable
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[0];
+        return new Class[] {
+                AppConfig.class
+        };
     }
 
     //specifies the configurations depend on Servlet specification, esp, web mvc related configurations
