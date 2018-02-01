@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(Constants.URI_API)
 public class hieu {
 
-    @RequestMapping(value = "/hieu" , method = RequestMethod.GET)
+    @RequestMapping(value = "/" , method = RequestMethod.GET)
     public ResponseEntity<String> ping() {
         return new ResponseEntity<>("Hieu", HttpStatus.OK);
     }

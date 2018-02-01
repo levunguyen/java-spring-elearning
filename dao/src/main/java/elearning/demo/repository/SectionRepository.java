@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface SectionRepository extends JpaRepository<Section, String> {
 
     @Query("select s from Section s where s.course.id = :courseId")
