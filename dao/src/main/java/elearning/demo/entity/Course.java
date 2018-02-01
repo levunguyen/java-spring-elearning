@@ -1,5 +1,8 @@
 package elearning.demo.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -7,37 +10,45 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-class Course implements Serializable {
+public class Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     private String id = UUID.randomUUID().toString();
 
+    @Column(name = "course_name")
     private String courseName;
 
+    @Column(name = "description")
     private String description;
 
-    private String image_url;
+    @Column(name = "image_url")
+    private String imageUrl;
 
+    @Column(name = "price")
     private double price;
 
     @OneToMany(mappedBy = "course")
     private List<UserCourse> userCourses;
 
+    @CreationTimestamp
+    @Column(name = "created_at", updatable=false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
+    @UpdateTimestamp
+    @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
     public Course() {
     }
 
-    public Course(String courseName, String description, String image_url, double price, Date createdAt, Date updatedAt) {
+    public Course(String courseName, String description, String imageUrl, double price, Date createdAt, Date updatedAt) {
         this.courseName = courseName;
         this.description = description;
-        this.image_url = image_url;
+        this.imageUrl = imageUrl;
         this.price = price;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -63,12 +74,12 @@ class Course implements Serializable {
         this.description = description;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public double getPrice() {
