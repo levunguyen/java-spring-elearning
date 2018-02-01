@@ -1,7 +1,7 @@
 package elearning.demo.service;
 
-import elearning.demo.model.CourseDetailModel;
+import elearning.demo.model.CourseDetail;
 
 public interface CourseService {
-    CourseDetailModel getDetailCourse(String courseId);
+    CourseDetail getDetailCourse(String courseId);
 }
