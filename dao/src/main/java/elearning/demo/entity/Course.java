@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-class Course implements Serializable {
+public class Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
