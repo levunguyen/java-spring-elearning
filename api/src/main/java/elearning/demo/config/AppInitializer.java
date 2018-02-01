@@ -15,10 +15,10 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         return new Class[] {
                 AppConfig.class,
                 WebConfig.class,
-                DataSourceConfig.class, //
-                JpaConfig.class, //
-                DataJpaConfig.class,//
-                Jackson2ObjectMapperConfig.class,//
+                DataSourceConfig.class,
+                JpaConfig.class,
+                DataJpaConfig.class,
+                Jackson2ObjectMapperConfig.class
         };
     }
 
