@@ -34,4 +34,9 @@ public class CourseServiceImpl implements CourseService{
         courseDetailModel.setSectionList(listSection);
         return courseDetailModel;
     }
+
+    @Override
+    public List<Course> findAllCourse() {
+        return courseRepository.findAll();
+    }
 }
