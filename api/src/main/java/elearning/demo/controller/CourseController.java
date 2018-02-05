@@ -41,14 +41,12 @@ public class CourseController {
     @GetMapping(value = "/{id}")
     @ResponseBody
     public ResponseEntity<Object> showDetailCourse(@PathVariable String id){
-
-        Optional<CourseDetail> courseOptional = Optional.ofNullable(courseService.getDetailCourse(id));
-
-        if(courseOptional.isPresent()){
-            return new ResponseEntity<>(courseOptional.get(), HttpStatus.OK);
+        Optional<CourseDetail> courseDetailOptional = Optional.ofNullable(courseService.getDetailCourse(id));
+        if(courseDetailOptional.isPresent()){
+            return new ResponseEntity<>(courseDetailOptional.get(), HttpStatus.OK);
         }
+        return new ResponseEntity<>("No course detail", HttpStatus.OK);
 
-        return new ResponseEntity<>("Course not found ", HttpStatus.NOT_FOUND);
     }
 
 }

@@ -1,5 +1,10 @@
 package elearning.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +23,7 @@ public class Section implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "course_id")
+    @JsonIgnore
     private Course course;
 
     private String sectionName;
@@ -36,7 +42,8 @@ public class Section implements Serializable{
     @OneToMany(
             mappedBy = "section",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch=FetchType.EAGER
     )
     private List<Video> listVideo = new ArrayList<>();
 
