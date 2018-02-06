@@ -3,7 +3,8 @@ package elearning.demo.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SectionDto implements Serializable{
+public class SectionDto implements Serializable {
+
     private String section_id;
     private String section_name;
 
@@ -30,4 +31,5 @@ public class SectionDto implements Serializable{
     public void setSection_name(String section_name) {
         this.section_name = section_name;
     }
+
 }

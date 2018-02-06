@@ -1,47 +1,66 @@
 package elearning.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import elearning.demo.entity.Course;
 import elearning.demo.entity.Section;
 import elearning.demo.entity.Video;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class CourseDetail implements Serializable {
+public class CourseDetailDto implements Serializable {
 
-    private CourseDto courseDto;
+    private String course_id;
+    private String course_name;
+    private String description;
+    private String image_url;
 
     private List<SectionDto> sectionList;
 
     private List<VideoDto> videoList;
 
-    public CourseDetail() {
+    public CourseDetailDto() {
         sectionList = new ArrayList<>();
         videoList = new ArrayList<>();
-        courseDto = new CourseDto();
     }
 
-    public CourseDetail(CourseDto course, List<SectionDto> sectionList,List<VideoDto> videoList) {
-        this.courseDto = course;
+    public CourseDetailDto(String course_id, String description, String image_url, String course_name, List<SectionDto> sectionList, List<VideoDto> videoList) {
+        this.course_id = course_id;
+        this.course_name = course_name;
+        this.description = description;
+        this.image_url = image_url;
         this.sectionList = sectionList;
         this.videoList = videoList;
     }
 
-    public CourseDto getCourse() {
-        return courseDto;
+    public String getCourse_id() {
+        return course_id;
     }
 
-    public void setCourse(CourseDto course) {
-        this.courseDto = course;
+    public void setCourse_id(String course_id) {
+        this.course_id = course_id;
+    }
+
+    public String getCourse_name() {
+        return course_name;
+    }
+
+    public void setCourse_name(String course_name) {
+        this.course_name = course_name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public List<SectionDto> getSectionList() {
@@ -75,11 +94,5 @@ public class CourseDetail implements Serializable {
         }
     }
 
-    public void setCourseDtoFromCourse(Course course){
-        courseDto.setCourse_id(course.getId());
-        courseDto.setCourse_name(course.getCourseName());
-        courseDto.setDescription(course.getDescription());
-        courseDto.setImage_url(course.getImageUrl());
-    }
 
 }

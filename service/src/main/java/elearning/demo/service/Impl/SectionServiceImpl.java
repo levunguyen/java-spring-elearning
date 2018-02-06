@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class SectionServiceImpl implements SectionService {
+
     @Autowired
     SectionRepository sectionRepository;
 
