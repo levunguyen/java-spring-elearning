@@ -13,4 +13,5 @@ public interface CourseRepository extends JpaRepository<Course,String> {
     /*add pageable*/
     @Query(value = "select c from Course  c order by c.id")
     List<Course> find10Course(Pageable pageable);
+
 }

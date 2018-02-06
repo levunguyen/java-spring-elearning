@@ -9,8 +9,9 @@ import java.io.InputStream;
 
 @Component
 public class FileSupport {
-    @Value("${multipart.location}")
-    String savePath;
+
+    @Value("${videos.location}")
+    String videosSavePath;
 
     public InputStream getFileStream(String filePath) throws FileNotFoundException {
         return new FileInputStream(filePath);

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface SectionRepository extends JpaRepository<Section, String> {
 
-    @Query("select s from Section s where s.course.id = :courseId")
+    @Query(value = "select s from Section s where s.course.id = :courseId")
     List<Section> findAllByCourseId(@Param("courseId") String courseId);
 
 }
