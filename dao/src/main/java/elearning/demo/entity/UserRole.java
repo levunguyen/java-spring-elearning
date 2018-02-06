@@ -1,5 +1,7 @@
 package elearning.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -12,18 +14,14 @@ public class UserRole implements Serializable {
     @Id
     private String id = UUID.randomUUID().toString();
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @MapsId("roleId")
-//    private Role role;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
+    @JsonManagedReference
     private Role role;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @MapsId("userId")
-//    private User user;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @JsonManagedReference
     private User user;
 
     @Temporal(TemporalType.TIMESTAMP)

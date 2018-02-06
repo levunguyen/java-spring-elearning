@@ -1,5 +1,7 @@
 package elearning.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +24,14 @@ public class Role implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "role",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY,
+            targetEntity = UserRole.class
+    )
+    @JsonBackReference
     private List<UserRole> userRoles = new ArrayList<>();
 
     public Role() {

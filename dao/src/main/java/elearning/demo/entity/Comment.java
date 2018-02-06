@@ -1,5 +1,7 @@
 package elearning.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,17 +15,14 @@ public class Comment implements Serializable {
     @Id
     private String id = UUID.randomUUID().toString();
 
-//    private String videoId;
-//
-//    private String userId;
-
-    // Fix lại như thế này
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "video_id")
+    @JsonManagedReference
     private Video video;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @JsonManagedReference
     private User user;
 
     private String content;
@@ -36,18 +35,10 @@ public class Comment implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date updatedAt;
 
-    // Chổ này map sai
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @MapsId("videoId")
-//    private Video video;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @MapsId("userId")
-//    private User user;
-
     public Comment() {}
 
-    public Comment(String id, Video video, User user, String content, String rootComment, Date createdAt, Date updatedAt) {
+    public Comment(String id, Video video, User user, String content,
+                   String rootComment, Date createdAt, Date updatedAt) {
         this.id = id;
         this.video = video;
         this.user = user;

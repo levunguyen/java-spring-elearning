@@ -1,7 +1,10 @@
 package elearning.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -21,8 +24,14 @@ public class Hashtag implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    @OneToMany(mappedBy="hashtag",cascade= CascadeType.ALL,orphanRemoval=true)
-    private List<HashtagCourse> listCourses;
+    @OneToMany(
+            mappedBy = "hashtag",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            targetEntity = HashtagCourse.class,
+            fetch = FetchType.LAZY
+    )
+    private List<HashtagCourse> listCourses = new ArrayList<>();
 
     public Hashtag() {
     }

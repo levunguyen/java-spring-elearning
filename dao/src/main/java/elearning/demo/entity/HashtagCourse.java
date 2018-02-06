@@ -13,11 +13,11 @@ public class HashtagCourse implements Serializable{
     @Id
     private String id= UUID.randomUUID().toString();
 
-    @ManyToOne(targetEntity=Course.class,fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+    @ManyToOne(targetEntity=Course.class,fetch=FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @ManyToOne(targetEntity=Hashtag.class,fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+    @ManyToOne(targetEntity=Hashtag.class,fetch=FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name = "hashtag_id")
     private Hashtag hashtag;
 

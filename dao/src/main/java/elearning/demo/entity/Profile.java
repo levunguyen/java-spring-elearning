@@ -12,7 +12,7 @@ public class Profile implements Serializable {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 

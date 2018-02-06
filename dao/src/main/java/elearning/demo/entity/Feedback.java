@@ -1,5 +1,7 @@
 package elearning.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,12 +15,14 @@ public class Feedback implements Serializable {
     @Id
     private String id= UUID.randomUUID().toString();
 
-    @ManyToOne(targetEntity = Course.class,fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Course.class,fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
+    @JsonManagedReference
     private Course course;
 
-    @ManyToOne(targetEntity = User.class,fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = User.class,fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @JsonManagedReference
     private User user;
 
     private String feedbackContent;

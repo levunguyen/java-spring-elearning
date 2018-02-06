@@ -1,7 +1,10 @@
 package elearning.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -23,8 +26,15 @@ public class User implements Serializable {
 
     private String avatarUrl;
 
-    @OneToMany(mappedBy = "user")
-    List<UserCourse> userCourses;
+    @OneToMany(
+            targetEntity = UserCourse.class,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "user"
+    )
+    @JsonBackReference
+    private List<UserCourse> userCourses = new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

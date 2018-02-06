@@ -1,10 +1,12 @@
 package elearning.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -29,8 +31,25 @@ public class Course implements Serializable {
     @Column(name = "price")
     private double price;
 
-    @OneToMany(mappedBy = "course")
-    private List<UserCourse> userCourses;
+    @OneToMany(
+            mappedBy = "course",
+            targetEntity = UserCourse.class,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            orphanRemoval = true
+    )
+    @JsonBackReference
+    private List<UserCourse> userCourses = new ArrayList<>();
+
+    @OneToMany(
+            targetEntity = Section.class,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "course",
+            orphanRemoval = true
+    )
+    @JsonBackReference
+    private List<Section> sections = new ArrayList<>();
 
     @CreationTimestamp
     @Column(name = "created_at", updatable=false)
@@ -45,7 +64,8 @@ public class Course implements Serializable {
     public Course() {
     }
 
-    public Course(String courseName, String description, String imageUrl, double price, Date createdAt, Date updatedAt) {
+    public Course(String courseName, String description, String imageUrl,
+                  double price, Date createdAt, Date updatedAt) {
         this.courseName = courseName;
         this.description = description;
         this.imageUrl = imageUrl;
@@ -104,5 +124,13 @@ public class Course implements Serializable {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<Section> getSections() {
+        return this.sections;
+    }
+
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 }
