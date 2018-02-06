@@ -19,11 +19,15 @@ public class VideoServiceImpl implements VideoService {
 
     private static final Logger log = LoggerFactory.getLogger(VideoServiceImpl.class);
 
-    @Autowired
-    private VideoRepository videoRepository;
+    private final VideoRepository videoRepository;
+
+    private final FileSupport fileSupport;
 
     @Autowired
-    private FileSupport fileSupport;
+    public VideoServiceImpl(VideoRepository videoRepository, FileSupport fileSupport) {
+        this.videoRepository = videoRepository;
+        this.fileSupport = fileSupport;
+    }
 
     @Override
     public List<Video> findAllBySectionId(String sectionId) {

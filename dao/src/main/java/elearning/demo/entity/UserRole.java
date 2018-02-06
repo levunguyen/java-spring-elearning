@@ -25,9 +25,11 @@ public class UserRole implements Serializable {
     private User user;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at")
     private Date updateAt;
 
     public UserRole() {

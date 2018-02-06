@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SectionDto implements Serializable{
+public class SectionDto implements Serializable {
+
     private String section_id;
     private String section_name;
 

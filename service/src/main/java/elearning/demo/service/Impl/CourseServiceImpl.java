@@ -1,17 +1,10 @@
 package elearning.demo.service.Impl;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import elearning.demo.entity.Course;
 import elearning.demo.entity.Section;
 import elearning.demo.entity.Video;
-import elearning.demo.model.CourseDetail;
-import elearning.demo.model.CourseDto;
-import elearning.demo.model.SectionDto;
-import elearning.demo.model.VideoDto;
+import elearning.demo.model.CourseDetailDto;
 import elearning.demo.repository.CourseRepository;
-import elearning.demo.repository.SectionRepository;
-import elearning.demo.repository.VideoRepository;
 import elearning.demo.service.CourseService;
 import elearning.demo.service.SectionService;
 import elearning.demo.service.VideoService;
@@ -25,14 +18,18 @@ import java.util.Optional;
 @Service
 public class CourseServiceImpl implements CourseService {
 
-    @Autowired
-    CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
+
+    private final SectionService sectionService;
+
+    private final VideoService videoService;
 
     @Autowired
-    SectionService sectionService;
-
-    @Autowired
-    VideoService videoService;
+    public CourseServiceImpl(CourseRepository courseRepository, SectionService sectionService, VideoService videoService) {
+        this.courseRepository = courseRepository;
+        this.sectionService = sectionService;
+        this.videoService = videoService;
+    }
 
     @Override
     public List<Course> findAllCourse() {
@@ -40,29 +37,31 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public CourseDetail getDetailCourse(String courseId) {
+    public CourseDetailDto getDetailCourse(String courseId) {
+
         Optional<Course> courseOptional= courseRepository.findById(courseId);
         if(!courseOptional.isPresent()){
             return null;
         }
-        CourseDetail courseDetail = new CourseDetail();
-        courseDetail.setCourseDtoFromCourse(courseOptional.get());
+
+        CourseDetailDto courseDetailDto = new CourseDetailDto();
+
+        courseDetailDto.setCourse_id(courseOptional.get().getId());
+        courseDetailDto.setCourse_name(courseOptional.get().getCourseName());
+        courseDetailDto.setDescription(courseOptional.get().getDescription());
+        courseDetailDto.setImage_url(courseOptional.get().getImageUrl());
 
         List<Section> sections = sectionService.findAllSectionByCourseId(courseId);
-        courseDetail.addAllSection(sections);
+        courseDetailDto.addAllSection(sections);
 
         List<Video> videos = new ArrayList<>();
-        for(int i=0;i<sections.size() ;i++) {
-             courseDetail.getSectionList().get(i).
-                     addAllVideo(videoService.findAllBySectionId(sections.get(i).getId()));
+        for(Section section : sections) {
+            videos.addAll(videoService.findAllBySectionId(section.getId()));
         }
-//        courseDetail.addAllVideo(videos);
-        return courseDetail;
-    }
 
-    public Course findCourse(String courseId){
-        return courseRepository.findById(courseId).get();
-    }
+        courseDetailDto.addAllVideo(videos);
 
+        return courseDetailDto;
+    }
 
 }
