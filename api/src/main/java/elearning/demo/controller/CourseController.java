@@ -7,6 +7,7 @@ import elearning.demo.utility.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,5 +51,16 @@ public class CourseController {
 
         return new ResponseEntity<>("Course not found ", HttpStatus.NOT_FOUND);
     }
+    /*add pageable*/
+    @GetMapping(value = "/page/{p}")
+    @ResponseBody
+    public ResponseEntity<Object> retriveCourse(@PathVariable int p){
 
+        List<Course> courses = courseService.find10Course(new PageRequest(p,5));
+
+        if (courses == null) {
+            return new ResponseEntity<>("No course found", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(courses, HttpStatus.OK);
+    }
 }

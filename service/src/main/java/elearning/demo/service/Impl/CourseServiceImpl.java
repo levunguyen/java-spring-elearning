@@ -8,6 +8,7 @@ import elearning.demo.repository.CourseRepository;
 import elearning.demo.repository.SectionRepository;
 import elearning.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,5 +41,11 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<Course> findAllCourse() {
         return courseRepository.findAll();
+    }
+
+    /*add pageable*/
+    @Override
+    public List<Course> find10Course(PageRequest pageRequest) {
+        return this.courseRepository.find10Course(pageRequest);
     }
 }
