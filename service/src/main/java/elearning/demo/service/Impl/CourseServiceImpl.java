@@ -3,6 +3,7 @@ package elearning.demo.service.Impl;
 
 import elearning.demo.entity.Course;
 import elearning.demo.entity.Section;
+import elearning.demo.entity.Video;
 import elearning.demo.model.CourseDetail;
 import elearning.demo.repository.CourseRepository;
 import elearning.demo.repository.SectionRepository;
@@ -10,6 +11,7 @@ import elearning.demo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +24,6 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     SectionRepository sectionRepository;
 
-    @Autowired
-    CourseDetail courseDetail;
 
     @Override
     public CourseDetail getDetailCourse(String courseId) {
@@ -31,6 +31,17 @@ public class CourseServiceImpl implements CourseService {
         if(!courseOptional.isPresent()){
             return null;
         }
+        CourseDetail courseDetail = new CourseDetail();
+        courseDetail.setCourseDtoFromCourse(courseOptional.get());
+
+        List<Section> sections = sectionService.findAllSectionByCourseId(courseId);
+        courseDetail.addAllSection(sections);
+
+        List<Video> videos = new ArrayList<>();
+        for(Section section : sections) {
+            videos.addAll(videoService.findAllBySectionId(section.getId()));
+        }
+        courseDetail.addAllVideo(videos);
         List<Section> listSection = sectionRepository.findAllByCourseId(courseId);
         courseDetail.setCourse(courseOptional.get());
         courseDetail.setSectionList(listSection);
