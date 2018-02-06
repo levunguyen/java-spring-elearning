@@ -1,5 +1,7 @@
 package elearning.demo.entity;
 
+import org.springframework.cache.interceptor.CacheableOperation;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -14,22 +16,27 @@ public class User implements Serializable {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    @Column(unique = true)
+    @Column(name = "user_name",unique = true)
     private String userName;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "avatar_url")
     private String avatarUrl;
 
     @OneToMany(mappedBy = "user")
     List<UserCourse> userCourses;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at")
     private Date updatedAt;
 
     public User() {

@@ -16,16 +16,21 @@ public class Profile implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name="first_name")
     private String firstName;
 
+    @Column(name="last_name")
     private String lastName;
 
+    @Column(name="biography")
     private String biography;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="created_at")
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="updated_at")
     private Date updateAt;
 
     public Profile() {
