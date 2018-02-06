@@ -14,34 +14,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class CourseDetail implements Serializable {
 
-    private CourseDto courseDto;
+    private String course_id;
+    private String description;
+    private String image_url;
+    private String course_name;
 
     private List<SectionDto> sectionList;
 
-    private List<VideoDto> videoList;
+//    private List<VideoDto> videoList;
 
     public CourseDetail() {
         sectionList = new ArrayList<>();
-        videoList = new ArrayList<>();
-        courseDto = new CourseDto();
+//        videoList = new ArrayList<>();
     }
 
     public CourseDetail(CourseDto course, List<SectionDto> sectionList,List<VideoDto> videoList) {
-        this.courseDto = course;
         this.sectionList = sectionList;
-        this.videoList = videoList;
-    }
-
-    public CourseDto getCourse() {
-        return courseDto;
-    }
-
-    public void setCourse(CourseDto course) {
-        this.courseDto = course;
+//        this.videoList = videoList;
     }
 
     public List<SectionDto> getSectionList() {
@@ -52,12 +43,52 @@ public class CourseDetail implements Serializable {
         this.sectionList = sectionList;
     }
 
-    public List<VideoDto> getVideoList() {
-        return videoList;
+//    public List<VideoDto> getVideoList() {
+//        return videoList;
+//    }
+
+//    public void setVideoList(List<VideoDto> videoList) {
+//        this.videoList = videoList;
+//    }
+
+
+    public String getCourse_id() {
+        return course_id;
     }
 
-    public void setVideoList(List<VideoDto> videoList) {
-        this.videoList = videoList;
+    public void setCourse_id(String course_id) {
+        this.course_id = course_id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
+    public String getCourse_name() {
+        return course_name;
+    }
+
+    public void setCourse_name(String course_name) {
+        this.course_name = course_name;
+    }
+
+    public void setCourseDtoFromCourse(Course course){
+        setCourse_id(course.getId());
+        setCourse_name(course.getCourseName());
+        setDescription(course.getDescription());
+        setImage_url(course.getImageUrl());
     }
 
     public void addAllSection(List<Section> sections){
@@ -67,19 +98,14 @@ public class CourseDetail implements Serializable {
         }
     }
 
-    public void addAllVideo(List<Video> videos){
-        for (Video video:videos) {
-            VideoDto videoDto = new VideoDto(video.getId(),video.getVideoUrl(),
-                    video.getSection().getId(),video.getDescription(),video.getVideoName());
-            videoList.add(videoDto);
-        }
-    }
+//    public void addAllVideo(List<Video> videos){
+//        for (Video video:videos) {
+//            VideoDto videoDto = new VideoDto(video.getId(),video.getVideoUrl(),
+//                    video.getSection().getId(),video.getDescription(),video.getVideoName());
+//            videoList.add(videoDto);
+//        }
+//    }
 
-    public void setCourseDtoFromCourse(Course course){
-        courseDto.setCourse_id(course.getId());
-        courseDto.setCourse_name(course.getCourseName());
-        courseDto.setDescription(course.getDescription());
-        courseDto.setImage_url(course.getImageUrl());
-    }
+
 
 }

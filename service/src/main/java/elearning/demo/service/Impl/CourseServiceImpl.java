@@ -34,9 +34,6 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     VideoService videoService;
 
-    @Autowired
-    CourseDetail courseDetail;
-
     @Override
     public List<Course> findAllCourse() {
         return courseRepository.findAll();
@@ -48,17 +45,18 @@ public class CourseServiceImpl implements CourseService {
         if(!courseOptional.isPresent()){
             return null;
         }
-
+        CourseDetail courseDetail = new CourseDetail();
         courseDetail.setCourseDtoFromCourse(courseOptional.get());
 
         List<Section> sections = sectionService.findAllSectionByCourseId(courseId);
         courseDetail.addAllSection(sections);
 
         List<Video> videos = new ArrayList<>();
-        for(Section section : sections) {
-            videos.addAll(videoService.findAllBySectionId(section.getId()));
+        for(int i=0;i<sections.size() ;i++) {
+             courseDetail.getSectionList().get(i).
+                     addAllVideo(videoService.findAllBySectionId(sections.get(i).getId()));
         }
-        courseDetail.addAllVideo(videos);
+//        courseDetail.addAllVideo(videos);
         return courseDetail;
     }
 
