@@ -1,5 +1,7 @@
 package elearning.demo.entity;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -14,8 +16,10 @@ public class Video implements Serializable {
     private String id = UUID.randomUUID().toString();
 
 //    private String sectionId;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "section_id")
+    @JsonIgnore //bỏ qua lỗi parse json(gọi qua gọi lại) mà tham chiếu 2 chiều của entity(video và section)
     private Section section;
 
     private String videoName;

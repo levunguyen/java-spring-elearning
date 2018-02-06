@@ -1,5 +1,7 @@
 package elearning.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -31,6 +33,9 @@ public class Course implements Serializable {
 
     @OneToMany(mappedBy = "course")
     private List<UserCourse> userCourses;
+
+    @OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
+    private List<Section> sections;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable=false)

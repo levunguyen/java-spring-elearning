@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
+import java.util.List;
 
 @Service
 @Transactional
@@ -23,6 +24,11 @@ public class VideoServiceImpl implements VideoService {
 
     @Autowired
     private FileSupport fileSupport;
+
+    @Override
+    public List<Video> findAllBySectionId(String sectionId) {
+        return videoRepository.getAllVideoOfSection(sectionId);
+    }
 
     @Override
     public Video findVideoById(String id) {
