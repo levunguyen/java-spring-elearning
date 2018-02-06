@@ -22,15 +22,12 @@ public class Section implements Serializable{
     @JsonManagedReference
     private Course course;
 
-    @Column(name = "section_name")
     private String sectionName;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at")
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at")
     private Date updatedAt;
 
     @OneToMany(

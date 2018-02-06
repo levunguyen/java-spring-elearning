@@ -1,10 +1,7 @@
 package elearning.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -17,34 +14,22 @@ public class User implements Serializable {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    @Column(name = "user_name",unique = true)
+    @Column(unique = true)
     private String userName;
 
-    @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "avatar_url")
     private String avatarUrl;
 
-    @OneToMany(
-            targetEntity = UserCourse.class,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "user"
-    )
-    @JsonBackReference
-    private List<UserCourse> userCourses = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    List<UserCourse> userCourses;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at")
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at")
     private Date updatedAt;
 
     public User() {

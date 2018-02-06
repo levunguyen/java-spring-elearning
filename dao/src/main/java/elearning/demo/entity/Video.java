@@ -22,21 +22,16 @@ public class Video implements Serializable {
     @JsonManagedReference
     private Section section;
 
-    @Column(name = "video_name")
     private String videoName;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "video_url")
     private String videoUrl;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at")
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at")
     private Date updatedAt;
 
     @OneToMany(

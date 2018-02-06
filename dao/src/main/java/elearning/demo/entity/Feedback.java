@@ -25,14 +25,11 @@ public class Feedback implements Serializable {
     @JsonManagedReference
     private User user;
 
-    @Column(name="feedback_content")
     private String feedbackContent;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at")
     private Date createdAt;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at")
     private Date updatedAt;
 
     public Feedback() {

@@ -16,15 +16,12 @@ public class Role implements Serializable {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    @Column(name="role_name")
     private String roleName;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="create_at")
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="updated_at")
     private Date updateAt;
 
     @OneToMany(

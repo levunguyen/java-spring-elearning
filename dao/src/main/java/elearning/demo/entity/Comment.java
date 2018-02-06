@@ -25,18 +25,14 @@ public class Comment implements Serializable {
     @JsonManagedReference
     private User user;
 
-    @Column(name="content")
     private String content;
 
-    @Column(name="root_comment")
     private String rootComment;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="created_at")
     private Date createdAt;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="updated_at")
     private Date updatedAt;
 
     public Comment() {}
