@@ -1,7 +1,7 @@
 package elearning.demo.controller;
 
 import elearning.demo.entity.Course;
-import elearning.demo.model.CourseDetail;
+import elearning.demo.model.CourseDetailDto;
 import elearning.demo.service.CourseService;
 import elearning.demo.utility.Constants;
 import org.slf4j.Logger;
@@ -40,15 +40,18 @@ public class CourseController {
 
     @GetMapping(value = "/{id}")
     @ResponseBody
-    public ResponseEntity<Object> showDetailCourse(@PathVariable String id){
+    public ResponseEntity<Object> getDetailCourse(@PathVariable String id){
 
-        Optional<CourseDetail> courseOptional = Optional.ofNullable(courseService.getDetailCourse(id));
+        log.debug("Get detail course");
 
-        if(courseOptional.isPresent()){
-            return new ResponseEntity<>(courseOptional.get(), HttpStatus.OK);
+        Optional<CourseDetailDto> courseDetailOptional = Optional.ofNullable(courseService.getDetailCourse(id));
+
+        if(courseDetailOptional.isPresent()){
+            return new ResponseEntity<>(courseDetailOptional.get(), HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("Course not found ", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("No course detail", HttpStatus.OK);
+
     }
 
 }
