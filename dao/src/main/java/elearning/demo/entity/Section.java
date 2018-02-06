@@ -33,11 +33,6 @@ public class Section implements Serializable{
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    // Lỗi
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @MapsId("courseId")
-//    private Course course;
-
     @OneToMany(
             targetEntity = Video.class,
             cascade = CascadeType.ALL,

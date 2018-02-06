@@ -53,5 +53,4 @@ public class CourseController {
         return new ResponseEntity<>("No course detail", HttpStatus.OK);
 
     }
-
 }
