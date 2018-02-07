@@ -1,6 +1,6 @@
 package elearning.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,30 +15,33 @@ public class Comment implements Serializable {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "video_id")
-    @JsonManagedReference
+    @JsonIgnore
     private Video video;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
+    @JsonIgnore
     private User user;
 
+    @Column(name="content")
     private String content;
 
+    @Column(name="root_comment")
     private String rootComment;
 
     @Temporal(TemporalType.DATE)
+    @Column(name="created_at")
     private Date createdAt;
 
     @Temporal(TemporalType.DATE)
+    @Column(name="updated_at")
     private Date updatedAt;
 
     public Comment() {}
 
-    public Comment(String id, Video video, User user, String content,
-                   String rootComment, Date createdAt, Date updatedAt) {
+    public Comment(String id, Video video, User user, String content, String rootComment, Date createdAt, Date updatedAt) {
         this.id = id;
         this.video = video;
         this.user = user;

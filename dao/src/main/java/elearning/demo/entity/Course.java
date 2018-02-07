@@ -2,14 +2,13 @@ package elearning.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 public class Course implements Serializable {
@@ -35,21 +34,19 @@ public class Course implements Serializable {
             mappedBy = "course",
             targetEntity = UserCourse.class,
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             orphanRemoval = true
     )
-    @JsonBackReference
-    private List<UserCourse> userCourses = new ArrayList<>();
+    private Set<UserCourse> userCourses = new HashSet<>();
 
     @OneToMany(
             targetEntity = Section.class,
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "course",
             orphanRemoval = true
     )
-    @JsonBackReference
-    private List<Section> sections = new ArrayList<>();
+    private Set<Section> sections = new HashSet<>();
 
     @CreationTimestamp
     @Column(name = "created_at", updatable=false)
@@ -126,11 +123,11 @@ public class Course implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public List<Section> getSections() {
+    public Set<Section> getSections() {
         return this.sections;
     }
 
-    public void setSections(List<Section> sections) {
+    public void setSections(Set<Section> sections) {
         this.sections = sections;
     }
 }

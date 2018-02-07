@@ -29,7 +29,7 @@ public class Hashtag implements Serializable{
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             targetEntity = HashtagCourse.class,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     private List<HashtagCourse> listCourses = new ArrayList<>();
 

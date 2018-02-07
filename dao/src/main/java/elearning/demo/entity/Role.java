@@ -28,10 +28,9 @@ public class Role implements Serializable {
             mappedBy = "role",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             targetEntity = UserRole.class
     )
-    @JsonBackReference
     private List<UserRole> userRoles = new ArrayList<>();
 
     public Role() {

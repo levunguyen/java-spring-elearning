@@ -23,7 +23,13 @@ public class User implements Serializable {
 
     private String avatarUrl;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(
+            mappedBy = "user",
+            targetEntity = UserCourse.class,
+            orphanRemoval = true,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
     List<UserCourse> userCourses;
 
     @Temporal(TemporalType.TIMESTAMP)

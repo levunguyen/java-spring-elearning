@@ -3,6 +3,8 @@ package elearning.demo.controller;
 import elearning.demo.entity.Course;
 import elearning.demo.model.CourseDetailDto;
 import elearning.demo.service.CourseService;
+import elearning.demo.service.SectionService;
+import elearning.demo.service.VideoService;
 import elearning.demo.utility.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,19 +40,30 @@ public class CourseController {
         return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 
-    @GetMapping(value = Constants.URI_COURSE)
+//    @GetMapping(value = Constants.URI_COURSE)
+//    @ResponseBody
+//    public ResponseEntity<Object> getDetailCourse(@RequestParam("id") String id) {
+//
+//        log.debug("Get detail course");
+//
+//        Optional<CourseDetailDto> courseDetailOptional = Optional.ofNullable(courseService.getDetailCourse(id));
+//
+//        if(courseDetailOptional.isPresent()){
+//            return new ResponseEntity<>(courseDetailOptional.get(), HttpStatus.OK);
+//        }
+//
+//        return new ResponseEntity<>("No course detail", HttpStatus.OK);
+//
+//    }
+
+    @GetMapping(value = "/course")
     @ResponseBody
-    public ResponseEntity<Object> getDetailCourse(@RequestParam("id") String id){
+    public ResponseEntity<Object> getCourseByCourseId(@RequestParam("id") String id) {
 
-        log.debug("Get detail course");
+        Optional<Course> course = courseService.findByCourseId(id);
 
-        Optional<CourseDetailDto> courseDetailOptional = Optional.ofNullable(courseService.getDetailCourse(id));
-
-        if(courseDetailOptional.isPresent()){
-            return new ResponseEntity<>(courseDetailOptional.get(), HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>("No course detail", HttpStatus.OK);
-
+        if (course.isPresent())
+            return new ResponseEntity<Object>(course.get().getSections(), HttpStatus.OK);
+        return new ResponseEntity<Object>("Course not found", HttpStatus.NOT_FOUND);
     }
 }

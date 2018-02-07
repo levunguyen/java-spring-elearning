@@ -1,6 +1,7 @@
 package elearning.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -17,9 +18,9 @@ public class Video implements Serializable {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id")
-    @JsonManagedReference
+    @JsonIgnore
     private Section section;
 
     private String videoName;
@@ -37,10 +38,9 @@ public class Video implements Serializable {
     @OneToMany(
             targetEntity = Comment.class,
             mappedBy = "video",
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    @JsonBackReference
     private List<Comment> comments = new ArrayList<>();
 
     public Video() {}

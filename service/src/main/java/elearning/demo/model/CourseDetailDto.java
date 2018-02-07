@@ -13,23 +13,23 @@ public class CourseDetailDto implements Serializable {
     private String description;
     private String image_url;
 
-    private List<SectionDto> sectionList;
+    private List<Section> sectionList;
 
-    private List<VideoDto> videoList;
+    private List<Video> videoList;
 
     public CourseDetailDto() {
         sectionList = new ArrayList<>();
         videoList = new ArrayList<>();
     }
 
-    public CourseDetailDto(String course_id, String description, String image_url, String course_name, List<SectionDto> sectionList, List<VideoDto> videoList) {
-        this.course_id = course_id;
-        this.course_name = course_name;
-        this.description = description;
-        this.image_url = image_url;
-        this.sectionList = sectionList;
-        this.videoList = videoList;
-    }
+//    public CourseDetailDto(String course_id, String description, String image_url, String course_name, List<SectionDto> sectionList, List<VideoDto> videoList) {
+//        this.course_id = course_id;
+//        this.course_name = course_name;
+//        this.description = description;
+//        this.image_url = image_url;
+//        this.sectionList = sectionList;
+//        this.videoList = videoList;
+//    }
 
     public String getCourse_id() {
         return course_id;
@@ -63,35 +63,31 @@ public class CourseDetailDto implements Serializable {
         this.image_url = image_url;
     }
 
-    public List<SectionDto> getSectionList() {
+    public List<Section> getSectionList() {
         return sectionList;
     }
 
-    public void setSectionList(List<SectionDto> sectionList) {
+    public void setSectionList(List<Section> sectionList) {
         this.sectionList = sectionList;
     }
 
-    public List<VideoDto> getVideoList() {
+    public List<Video> getVideoList() {
         return videoList;
     }
 
-    public void setVideoList(List<VideoDto> videoList) {
+    public void setVideoList(List<Video> videoList) {
         this.videoList = videoList;
     }
 
     public void addAllSection(List<Section> sections){
         for (Section section:sections) {
             SectionDto sectionDto = new SectionDto(section.getId(),section.getSectionName());
-            sectionList.add(sectionDto);
+            sectionList.add(section);
         }
     }
 
     public void addAllVideo(List<Video> videos){
-        for (Video video:videos) {
-            VideoDto videoDto = new VideoDto(video.getId(),video.getVideoUrl(),
-                    video.getSection().getId(),video.getDescription(),video.getVideoName());
-            videoList.add(videoDto);
-        }
+        videoList.addAll(videos);
     }
 
 
