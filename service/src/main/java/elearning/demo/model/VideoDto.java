@@ -2,7 +2,8 @@ package elearning.demo.model;
 
 import java.io.Serializable;
 
-public class VideoDto implements Serializable{
+public class VideoDto implements Serializable {
+
     private String id;
     private String video_url;
     private String section_id;
@@ -61,4 +62,5 @@ public class VideoDto implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

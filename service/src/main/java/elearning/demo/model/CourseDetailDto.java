@@ -1,20 +1,13 @@
 package elearning.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import elearning.demo.entity.Course;
 import elearning.demo.entity.Section;
 import elearning.demo.entity.Video;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseDetail implements Serializable {
+public class CourseDetailDto implements Serializable {
 
     private String course_id;
     private String description;
@@ -23,33 +16,13 @@ public class CourseDetail implements Serializable {
 
     private List<SectionDto> sectionList;
 
-//    private List<VideoDto> videoList;
-
-    public CourseDetail() {
+    public CourseDetailDto() {
         sectionList = new ArrayList<>();
-//        videoList = new ArrayList<>();
     }
 
-    public CourseDetail(CourseDto course, List<SectionDto> sectionList,List<VideoDto> videoList) {
-        this.sectionList = sectionList;
-//        this.videoList = videoList;
-    }
-
-    public List<SectionDto> getSectionList() {
-        return sectionList;
-    }
-
-    public void setSectionList(List<SectionDto> sectionList) {
+    public CourseDetailDto(String course_id, String description, String image_url, String course_name, List<SectionDto> sectionList, List<VideoDto> videoList) {
         this.sectionList = sectionList;
     }
-
-//    public List<VideoDto> getVideoList() {
-//        return videoList;
-//    }
-
-//    public void setVideoList(List<VideoDto> videoList) {
-//        this.videoList = videoList;
-//    }
 
 
     public String getCourse_id() {
@@ -82,6 +55,14 @@ public class CourseDetail implements Serializable {
 
     public void setCourse_name(String course_name) {
         this.course_name = course_name;
+    }
+
+    public List<SectionDto> getSectionList() {
+        return sectionList;
+    }
+
+    public void setSectionList(List<SectionDto> sectionList) {
+        this.sectionList = sectionList;
     }
 
     public void setCourseDtoFromCourse(Course course){

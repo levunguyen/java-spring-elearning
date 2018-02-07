@@ -1,7 +1,7 @@
 package elearning.demo.controller;
 
 import elearning.demo.entity.Course;
-import elearning.demo.model.CourseDetail;
+import elearning.demo.model.CourseDetailDto;
 import elearning.demo.service.CourseService;
 import elearning.demo.utility.Constants;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = Constants.URI_API + Constants.URI_COURSES)
+@RequestMapping(value = Constants.URI_API)
 public class CourseController {
 
     private static final Logger log = LoggerFactory.getLogger(CourseController.class);
@@ -23,7 +23,7 @@ public class CourseController {
     @Autowired
     CourseService courseService;
 
-    @GetMapping
+    @GetMapping(value = Constants.URI_COURSES)
     @ResponseBody
     public ResponseEntity<Object> getAllCourse() {
 
@@ -38,13 +38,18 @@ public class CourseController {
         return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = Constants.URI_COURSE)
     @ResponseBody
-    public ResponseEntity<Object> showDetailCourse(@PathVariable String id){
-        Optional<CourseDetail> courseDetailOptional = Optional.ofNullable(courseService.getDetailCourse(id));
+    public ResponseEntity<Object> getDetailCourse(@RequestParam("id") String id){
+
+        log.debug("Get detail course");
+
+        Optional<CourseDetailDto> courseDetailOptional = Optional.ofNullable(courseService.getDetailCourse(id));
+
         if(courseDetailOptional.isPresent()){
             return new ResponseEntity<>(courseDetailOptional.get(), HttpStatus.OK);
         }
+
         return new ResponseEntity<>("No course detail", HttpStatus.OK);
 
     }

@@ -8,8 +8,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface VideoRepository extends JpaRepository<Video, String> {
+
     Video findVideoById(String id);
 
-    @Query("select v from Video v where v.section.id = :sectionId")
+    @Query(value = "select v from Video v where v.section.id = :sectionId")
     List<Video> getAllVideoOfSection(@Param("sectionId") String sectionId);
+
 }

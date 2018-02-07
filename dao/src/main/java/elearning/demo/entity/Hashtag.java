@@ -14,11 +14,14 @@ public class Hashtag implements Serializable{
     @Id
     private String id= UUID.randomUUID().toString();
 
+    @Column(name="hashtag_name")
     private String hashtagName;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="created_at")
     private Date createAt;
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="updated_at")
     private Date updatedAt;
 
     @OneToMany(mappedBy="hashtag",cascade= CascadeType.ALL,orphanRemoval=true)

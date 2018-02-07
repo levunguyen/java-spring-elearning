@@ -24,9 +24,11 @@ public class UserCourse implements Serializable {
     private boolean mentor;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_at")
     private Date updatedAt;
 
     public UserCourse() {
