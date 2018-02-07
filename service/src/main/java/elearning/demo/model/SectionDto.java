@@ -51,7 +51,6 @@ public class SectionDto implements Serializable {
     public void setSection_name(String section_name) {
         this.section_name = section_name;
     }
-<<<<<<< HEAD
 
     public void addAllVideo(List<Video> videos){
         for (Video video:videos) {
@@ -60,8 +59,5 @@ public class SectionDto implements Serializable {
             list_video.add(videoDto);
         }
     }
-||||||| merged common ancestors
-=======
 
->>>>>>> dev
 }
