@@ -59,7 +59,7 @@ public class CourseController {
     @ResponseBody
     public ResponseEntity<Object> retriveCourse(@PathVariable int p){
 
-        List<Course> courses = courseService.find10Course(PageRequest.of(p,5));
+        List<Course> courses = courseService.find10Course(PageRequest.of(p,8));
 
         if (courses == null) {
             return new ResponseEntity<>("No course found", HttpStatus.NOT_FOUND);
