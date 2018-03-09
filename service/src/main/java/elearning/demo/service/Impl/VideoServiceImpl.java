@@ -19,42 +19,13 @@ public class VideoServiceImpl implements VideoService {
 
     private static final Logger log = LoggerFactory.getLogger(VideoServiceImpl.class);
 
-    private final VideoRepository videoRepository;
-
-    private final FileSupport fileSupport;
-
     @Autowired
-    public VideoServiceImpl(VideoRepository videoRepository, FileSupport fileSupport) {
-        this.videoRepository = videoRepository;
-        this.fileSupport = fileSupport;
-    }
+    private VideoRepository videoRepository;
 
     @Override
     public List<Video> findAllBySectionId(String sectionId) {
         return videoRepository.getAllVideoOfSection(sectionId);
     }
 
-    @Override
-    public Video findVideoById(String id) {
-
-        log.debug("find video by id@" + id);
-
-        Video video = videoRepository.findVideoById(id);
-
-        return video;
-
-    }
-
-    @Override
-    public InputStream getVideoStream(String videoPath) {
-        InputStream is = null;
-        try {
-            is = fileSupport.getFileStream(videoPath);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return is;
-    }
 
 }
