@@ -16,6 +16,7 @@
 
     <properties>
         <jackson.version>2.9.2</jackson.version>
+        <servlet.version>3.1.0</servlet.version>
     </properties>
 
     <name>Customer API</name>
@@ -25,6 +26,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet.version}</version>
         </dependency>
 
         <dependency>
