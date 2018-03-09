@@ -50,8 +50,7 @@ public class CourseController {
             return new ResponseEntity<>(courseDetailOptional.get(), HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("No course detail", HttpStatus.OK);
-
+        return new ResponseEntity<>("No course detail", HttpStatus.NOT_FOUND);
     }
 
 }

@@ -1,11 +1,12 @@
 package elearning.demo.config;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.lang.Nullable;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
-
+@Order(0)
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     //specifies the configuration classes should be loaded for the Spring infrastructure
@@ -18,7 +19,8 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
                 DataSourceConfig.class,
                 JpaConfig.class,
                 DataJpaConfig.class,
-                Jackson2ObjectMapperConfig.class
+                Jackson2ObjectMapperConfig.class,
+                SecurityConfig.class
         };
     }
 

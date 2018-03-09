@@ -8,6 +8,7 @@ public class Constants {
 
     public static final String URI_COURSES = "/courses";
     public static final String URI_COURSE = "/course";
+    public static final String URI_SECURITY = "/login";
 
     private Constants() {
         throw new InstantiationError( "Must not instantiate this class" );
