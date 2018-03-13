@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -21,22 +20,20 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+    public UserDetails loadUserByUsername (String username) throws UsernameNotFoundException{
         User user = userRepository.findByUsername(username);
 
-        if( user == null){
-            throw new UsernameNotFoundException("No user found. Username tried: " + username);
+        if(user == null){
+            throw new UsernameNotFoundException("No user found. Username: "+ username);
         }
-
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("user"));
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 
     @Override
-    public void createUser(User user) {
+    public void createUser(User user){
         userRepository.save(user);
     }
 }
