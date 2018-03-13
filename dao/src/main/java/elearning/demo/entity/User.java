@@ -16,7 +16,7 @@ public class User implements Serializable {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    @Column(name = "user_name",unique = true)
+    @Column(name = "user_name", unique = true)
     private String username;
 
     @Column(name = "password")
@@ -115,7 +115,8 @@ public class User implements Serializable {
         return username;
     }
 
-    public void setUsername(String username){
+    public void setUsername(String username) {
         this.username = username;
     }
+
 }
