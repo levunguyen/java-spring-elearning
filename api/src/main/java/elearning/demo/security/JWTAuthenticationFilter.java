@@ -28,37 +28,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         this.authenticationManager = authenticationManager;
         this.objectMapper = objectMapper;
     }
-    private class SuccessfulAuthenticationResponse{
-        private String jwt;
-
-        public String getJwt() {
-            return jwt;
-        }
-
-        public void setJwt(String jwt) {
-            this.jwt = jwt;
-        }
-
-        private long expires;
-
-        public long getExpires() {
-            return expires;
-        }
-
-        public void setExpires(long expires) {
-            this.expires = expires;
-        }
-
-        public SuccessfulAuthenticationResponse(String jwt, long expires){
-            this.jwt = jwt;
-            this.expires = expires;
-        }
-    }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
         try {
-            User creads = new ObjectMapper().readValue(request.getInputStream(), User.class);
+            User creads = new ObjectMapper().readValue(req.getInputStream(), User.class);
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                        creads.getUserName(),
@@ -72,10 +46,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        super.successfulAuthentication(request, response, chain, authResult);
+    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException, ServletException {
         String username = ((org.springframework.security.core.userdetails.User)
-                authResult.getPrincipal()).getUsername();
+                auth.getPrincipal()).getUsername();
         String jwt = Jwts.builder()
                 .setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
@@ -84,11 +57,40 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         try {
             String jwtResponse = objectMapper
                     .writeValueAsString(successfulAuthenticationResponse);
-            response.setContentType("application/json");
-            response.getWriter().write(jwtResponse);
+            res.setContentType("application/json");
+            res.getWriter().write(jwtResponse);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
+    private class SuccessfulAuthenticationResponse{
+        private String jwt;
+
+        private long expires;
+
+        public SuccessfulAuthenticationResponse(String jwt, long expires){
+            this.jwt = jwt;
+            this.expires = expires;
+        }
+
+        public String getJwt() {
+            return jwt;
+        }
+
+        public void setJwt(String jwt) {
+            this.jwt = jwt;
+        }
+
+        public long getExpires() {
+            return expires;
+        }
+
+        public void setExpires(long expire) {
+            this.expires = expire;
+        }
+
+    }
+
 }

@@ -26,7 +26,7 @@ public class UserController {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.createUser(user);
         String jwt = Jwts.builder()
-                .setSubject(user.getUserName())
+                .setSubject(user.getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();

@@ -13,7 +13,6 @@
     <artifactId>dao</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-
     <properties>
         <!-- data-jpa has spring framework 5.0.3-->
         <spring-data-jpa.version>2.0.3.RELEASE</spring-data-jpa.version>
@@ -82,6 +81,28 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- Spring security -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.9</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.version}</version>
         </dependency>
 
     </dependencies>

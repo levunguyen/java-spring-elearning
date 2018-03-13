@@ -23,6 +23,19 @@ public class JWTAuthorzationFilter extends BasicAuthenticationFilter {
         super(authenticationManager);
     }
 
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+        String header = request.getHeader(HEADER_STRING);
+        if (header == null || !header.startsWith(TOKEN_PREFIX)){
+            chain.doFilter(request,response);
+            return;
+        }
+
+        UsernamePasswordAuthenticationToken authenticationToken = getAuthentication(request);
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        chain.doFilter(request, response);
+        return;
+    }
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request){
         String token = request.getHeader(HEADER_STRING);
         if (token != null){
@@ -38,20 +51,5 @@ public class JWTAuthorzationFilter extends BasicAuthenticationFilter {
             return null;
         }
         return null;
-    }
-
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        super.doFilterInternal(request, response, chain);
-        String header = request.getHeader(HEADER_STRING);
-        if (header == null || !header.startsWith(TOKEN_PREFIX)){
-            chain.doFilter(request,response);
-            return;
-        }
-
-        UsernamePasswordAuthenticationToken authenticationToken = getAuthentication(request);
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        chain.doFilter(request, response);
-        return;
     }
 }

@@ -17,7 +17,7 @@ public class User implements Serializable {
     private String id = UUID.randomUUID().toString();
 
     @Column(name = "user_name",unique = true)
-    private String userName;
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -42,8 +42,8 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String userName, String password, String email, String avatarUrl, Date createdAt, Date updatedAt) {
-        this.userName = userName;
+    public User(String username, String password, String email, String avatarUrl, Date createdAt, Date updatedAt) {
+        this.username = username;
         this.password = password;
         this.email = email;
         this.avatarUrl = avatarUrl;
@@ -56,11 +56,11 @@ public class User implements Serializable {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -111,4 +111,11 @@ public class User implements Serializable {
         this.updatedAt = updatedAt;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
+    }
 }
