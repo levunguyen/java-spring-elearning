@@ -8,7 +8,5 @@ import java.util.List;
 public interface VideoService {
 
     List<Video> findAllBySectionId(String sectionId);//Hà Thêm để show list video
-    Video findVideoById(String id);
-    InputStream getVideoStream(String videoPath);
 
 }
